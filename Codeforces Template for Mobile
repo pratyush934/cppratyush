@@ -1,4 +1,6 @@
+
 #include<bits/stdc++.h>
+
 #pragma GCC optimize("O3,unroll-loops")
 #include<iostream>
 #include<cstdlib>
@@ -11,11 +13,13 @@
 #include<queue>
 using namespace std;
 
+
 /*-----------------------For Input & Output------------------------------*/
 #define Code ios_base::sync_with_stdio(false);
 #define By cin.tie(NULL);cout.tie(NULL); 
 #define Nitesh05 ll t;cin>>t;for(ll i=1;i<=t;i++){solve(i);}
 /*-----------------------------------------------------------------------*/
+
 
 /*-------------------------For Saving Time----------------------------------------*/
 #define ll long long
@@ -31,7 +35,8 @@ using namespace std;
 #define PI 3.141592653589793238462
 #define set_bits __builtin_popcountll
 #define sz(x) ((int)(x).size())
-#define all(x) (x).begin(), (x).end()
+#define all(x) x.begin(),x.end()
+#define rev(x) x.rbegin(),x.rend()
 #define vll vector<ll>
 #define vvll vector<vector<ll>>
 #define vb vector<bool>
@@ -39,9 +44,12 @@ using namespace std;
 #define mll map<ll,ll>
 #define mcl map<char,ll>
 #define debug(input) for(auto &i:input)cout<<i<<" ";
+#define take(input) for(auto &i:input)cin>>i;
 #define py cout<<"YES"<<endl;
 #define pn cout<<"NO"<<endl;
+#define nl cout<<endl;
 /*-----------------------------------------------------------------------*/
+
 
 /*---------------------------------------Number Theory Stuff Below------------------------------------------------------------------------------------*/
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
@@ -64,6 +72,7 @@ bool isPowerOfTwo(ll n){if(n==0)return false;return (ceil(log2(n)) == floor(log2
 bool isPerfectSquare(ll x){if (x >= 0) {ll sr = sqrt(x);return (sr * sr == x);}return false;}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+
 /*--------------------------------------My Personal Functions--------------------------------------------------------------------------------------------------------------*/
 void gc(ll n,ll maxi){unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();std::srand(seed);for (int i = 0; i < n; ++i) {cout<<(rand() % maxi) + 1<<" "; }cout<<endl;}
 bool mapFind(map<ll,ll>&m,ll i){return m.find(i)!=m.end();}
@@ -75,13 +84,16 @@ bool isEven(ll n){return !(n&1);}
 bool isSorted(vector<ll>&temp){for(ll i=0;i<temp.size()-1;i++){if(temp[i]>temp[i+1])return false;}return true;}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+
+/*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
 void solve(ll t){
-
+  
 }
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*--------------------------Main Function-------------------------*/
 signed main(){
+
    Code By Nitesh05
 }
 /*----------------------------------------------------------------*/
