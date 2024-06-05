@@ -39,6 +39,7 @@ using namespace std;
 #define rev(x) x.rbegin(),x.rend()
 #define vll vector<ll>
 #define vvll vector<vector<ll>>
+#define vpll vector<pair<ll,ll>>
 #define vb vector<bool>
 #define vc vector<char>
 #define mll map<ll,ll>
@@ -48,6 +49,7 @@ using namespace std;
 #define py cout<<"YES"<<endl;
 #define pn cout<<"NO"<<endl;
 #define nl cout<<endl;
+#define cn continue;
 /*-----------------------------------------------------------------------*/
 
 
@@ -86,6 +88,7 @@ bool isSorted(vector<ll>&temp){for(ll i=0;i<temp.size()-1;i++){if(temp[i]>temp[i
 
 
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
+
 void solve(ll t){
   
 }
