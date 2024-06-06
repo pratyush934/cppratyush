@@ -3,6 +3,7 @@
 #endif
 #pragma GCC optimize("O3,unroll-loops")
 #include<iostream>
+#include<algorithm>
 #include<cstdlib>
 #include<ctime>
 #include<vector>
@@ -33,10 +34,9 @@ using namespace std;
 #define ff first
 #define ss second
 #define PI 3.141592653589793238462
-#define set_bits __builtin_popcountll
 #define sz(x) ((int)(x).size())
 #define all(x) x.begin(),x.end()
-#define rev(x) x.rbegin(),x.rend()
+#define rall(x) x.rbegin(),x.rend()
 #define vll vector<ll>
 #define vvll vector<vector<ll>>
 #define vpll vector<pair<ll,ll>>
@@ -46,11 +46,21 @@ using namespace std;
 #define mcl map<char,ll>
 #define debug(input) for(auto &i:input)cout<<i<<" ";
 #define take(input) for(auto &i:input)cin>>i;
-#define py cout<<"YES"<<endl;
-#define pn cout<<"NO"<<endl;
+#define py cout<<"YES"<<endl;return;
+#define pn cout<<"NO"<<endl;return;
 #define nl cout<<endl;
 #define cn continue;
 /*-----------------------------------------------------------------------*/
+
+/*--------------------------Bit Manipulation Stuff------------------------------------------------------------------------------------------------*/
+#define set_bits __builtin_popcountll
+#define bitparity __builtin_parityll
+#define leadingZeroesBits __builtin_clzll
+#define trailingZeroesBits __builtin_ctzll
+#define findFirstSetBit __builtin_ffsll
+ll decimalToBinary(ll n) {ll binaryNumber = 0;ll placeValue = 1;while (n > 0) {int remainder = n % 2;binaryNumber += remainder * placeValue;placeValue *= 10;n /= 2;}return binaryNumber;}
+ll binaryToDecimal(ll n) {ll decimalNumber = 0;ll base = 1;ll remainder;while (n > 0) {remainder = n % 10;decimalNumber += remainder * base;n /= 10;base *= 2;}return decimalNumber;}
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*---------------------------------------Number Theory Stuff Below------------------------------------------------------------------------------------*/
@@ -77,21 +87,26 @@ bool isPerfectSquare(ll x){if (x >= 0) {ll sr = sqrt(x);return (sr * sr == x);}r
 
 /*--------------------------------------My Personal Functions--------------------------------------------------------------------------------------------------------------*/
 void gc(ll n,ll maxi){unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();std::srand(seed);for (int i = 0; i < n; ++i) {cout<<(rand() % maxi) + 1<<" "; }cout<<endl;}
-bool mapFind(map<ll,ll>&m,ll i){return m.find(i)!=m.end();}
-bool mapNoFind(map<ll,ll>&m,ll i){return m.find(i)==m.end();}
-bool setFind(set<ll>&s,ll i){return s.find(i)!=s.end();}
-bool setNoFind(set<ll>&s,ll i){return s.find(i)==s.end();}
+bool af(const std::vector<ll>& arr, ll value) {auto it = std::find(arr.begin(), arr.end(), value);return it != arr.end();}
+bool anf(const std::vector<ll>& arr, ll value) {auto it = std::find(arr.begin(), arr.end(), value);return it == arr.end();}
+bool mf(map<ll,ll>&m,ll i){return m.find(i)!=m.end();}
+bool mnf(map<ll,ll>&m,ll i){return m.find(i)==m.end();}
+bool sf(set<ll>&s,ll i){return s.find(i)!=s.end();}
+bool snf(set<ll>&s,ll i){return s.find(i)==s.end();}
 bool isOdd(ll n){return n&1;}
 bool isEven(ll n){return !(n&1);}
 bool isSorted(vector<ll>&temp){for(ll i=0;i<temp.size()-1;i++){if(temp[i]>temp[i+1])return false;}return true;}
+bool allSame(vll &a){for(ll i=0;i<a.size()-1;i++){if(a[i]!=a[i+1])return false;}return true;}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
 
+
 void solve(ll t){
-  
+
 }
+
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*--------------------------Main Function-------------------------*/
