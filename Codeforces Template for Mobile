@@ -3,6 +3,7 @@
 
 #pragma GCC optimize("O3,unroll-loops")
 #include<iostream>
+#include<algorithm>
 #include<cstdlib>
 #include<ctime>
 #include<vector>
@@ -33,22 +34,37 @@ using namespace std;
 #define ff first
 #define ss second
 #define PI 3.141592653589793238462
-#define set_bits __builtin_popcountll
 #define sz(x) ((int)(x).size())
 #define all(x) x.begin(),x.end()
-#define rev(x) x.rbegin(),x.rend()
+#define rall(x) x.rbegin(),x.rend()
 #define vll vector<ll>
 #define vvll vector<vector<ll>>
+#define vpll vector<pair<ll,ll>>
 #define vb vector<bool>
 #define vc vector<char>
 #define mll map<ll,ll>
 #define mcl map<char,ll>
 #define debug(input) for(auto &i:input)cout<<i<<" ";
 #define take(input) for(auto &i:input)cin>>i;
-#define py cout<<"YES"<<endl;
-#define pn cout<<"NO"<<endl;
+#define py cout<<"YES"<<endl;return;
+#define pn cout<<"NO"<<endl;return;
 #define nl cout<<endl;
+#define cn continue;
 /*-----------------------------------------------------------------------*/
+
+/*--------------------------Bit Manipulation Stuff------------------------------------------------------------------------------------------------*/
+#define set_bits __builtin_popcountll
+#define bitparity __builtin_parityll
+#define leadingZeroBits __builtin_clzll
+#define trailingZeroBits __builtin_ctzll
+#define firstSetBit __builtin_ffsll
+#define lastSetBit(x) (x&-x)
+ll dtb(ll n) {ll binaryNumber = 0;ll placeValue = 1;while (n > 0) {int remainder = n % 2;binaryNumber += remainder * placeValue;placeValue *= 10;n /= 2;}return binaryNumber;}
+ll btd(ll n) {ll decimalNumber = 0;ll base = 1;ll remainder;while (n > 0) {remainder = n % 10;decimalNumber += remainder * base;n /= 10;base *= 2;}return decimalNumber;}
+ll ORinrange(ll left,ll right){while(left<right){left|=left+1;}return (left|right);}
+bool isPowerOfTwo(ll n){if(n==0)return false;return (ceil(log2(n)) == floor(log2(n)));}
+ll highestPowerOfTwo(ll n){ll ans=1,temp=2;while(temp<n){temp=temp<<1;if(temp>n)break;ans++;}return ans;}
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*---------------------------------------Number Theory Stuff Below------------------------------------------------------------------------------------*/
@@ -68,27 +84,33 @@ ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprim
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll fact(ll n){if(n==0)return 1;return n*fact(n-1);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
-bool isPowerOfTwo(ll n){if(n==0)return false;return (ceil(log2(n)) == floor(log2(n)));}
 bool isPerfectSquare(ll x){if (x >= 0) {ll sr = sqrt(x);return (sr * sr == x);}return false;}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*--------------------------------------My Personal Functions--------------------------------------------------------------------------------------------------------------*/
 void gc(ll n,ll maxi){unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();std::srand(seed);for (int i = 0; i < n; ++i) {cout<<(rand() % maxi) + 1<<" "; }cout<<endl;}
-bool mapFind(map<ll,ll>&m,ll i){return m.find(i)!=m.end();}
-bool mapNoFind(map<ll,ll>&m,ll i){return m.find(i)==m.end();}
-bool setFind(set<ll>&s,ll i){return s.find(i)!=s.end();}
-bool setNoFind(set<ll>&s,ll i){return s.find(i)==s.end();}
+bool af(const std::vector<ll>& arr, ll value) {auto it = std::find(arr.begin(), arr.end(), value);return it != arr.end();}
+bool anf(const std::vector<ll>& arr, ll value) {auto it = std::find(arr.begin(), arr.end(), value);return it == arr.end();}
+bool strf(string s,char b){return s.find(b)!=string::npos;}
+bool strnf(string s,char b){return s.find(b)!=string::npos;}
+bool mf(map<ll,ll>&m,ll i){return m.find(i)!=m.end();}
+bool mnf(map<ll,ll>&m,ll i){return m.find(i)==m.end();}
+bool sf(set<ll>&s,ll i){return s.find(i)!=s.end();}
+bool snf(set<ll>&s,ll i){return s.find(i)==s.end();}
 bool isOdd(ll n){return n&1;}
 bool isEven(ll n){return !(n&1);}
 bool isSorted(vector<ll>&temp){for(ll i=0;i<temp.size()-1;i++){if(temp[i]>temp[i+1])return false;}return true;}
+bool allSame(vll &a){for(ll i=0;i<a.size()-1;i++){if(a[i]!=a[i+1])return false;}return true;}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
+
 void solve(ll t){
-  
+ 
 }
+
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*--------------------------Main Function-------------------------*/
