@@ -610,7 +610,7 @@ void mo() {
 /*-----------------------For Input & Output------------------------------*/
 #define Code ios_base::sync_with_stdio(false);
 #define By cin.tie(NULL);cout.tie(NULL); 
-#define Nitesh05 ll t;cin>>t;for(ll i=1;i<=t;i++){solve(i);}
+#define Nitesh06 long long t;cin>>t;for(long long i=1;i<=t;i++){solve(i);}
 /*-----------------------------------------------------------------------*/
 
 
@@ -653,57 +653,56 @@ void mo() {
 #define trailingZeroBits __builtin_ctzll
 #define firstSetBit __builtin_ffsll
 #define lastSetBit(x) (x&-x)
-ll dtb(ll n) {ll binaryNumber = 0;ll placeValue = 1;while (n > 0) {int remainder = n % 2;binaryNumber += remainder * placeValue;placeValue *= 10;n /= 2;}return binaryNumber;}
-ll btd(ll n) {ll decimalNumber = 0;ll base = 1;ll remainder;while (n > 0) {remainder = n % 10;decimalNumber += remainder * base;n /= 10;base *= 2;}return decimalNumber;}
-ll ORinrange(ll left,ll right){while(left<right){left|=left+1;}return (left|right);}
-bool isPowerOfTwo(ll n){if(n==0)return false;return (ceil(log2(n)) == floor(log2(n)));}
-ll highestPowerOfTwo(ll n){ll ans=1,temp=2;while(temp<n){temp=temp<<1;if(temp>n)break;ans++;}return ans;}
+long long dtb(long long n) {long long binaryNumber = 0;long long placeValue = 1;while (n > 0) {int remainder = n % 2;binaryNumber += remainder * placeValue;placeValue *= 10;n /= 2;}return binaryNumber;}
+long long btd(long long n) {long long decimalNumber = 0;long long base = 1;ll remainder;while (n > 0) {remainder = n % 10;decimalNumber += remainder * base;n /= 10;base *= 2;}return decimalNumber;}
+long long ORinrange(long long left,long long right){while(left<right){left|=left+1;}return (left|right);}
+bool isPowerOfTwo(long long n){if(n==0)return false;return (ceil(log2(n)) == floor(log2(n)));}
+long long highestPowerOfTwo(long long n){long long ans=1,temp=2;while(temp<n){temp=temp<<1;if(temp>n)break;ans++;}return ans;}
 /*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*---------------------------------------Number Theory Stuff Below------------------------------------------------------------------------------------*/
-ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
-ll expo(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
-void extendgcd(ll a, ll b, ll*v) {if (b == 0) {v[0] = 1; v[1] = 0; v[2] = a; return ;} extendgcd(b, a % b, v); ll x = v[1]; v[1] = v[0] - v[1] * (a / b); v[0] = x; return;} //pass an arry of size1 3
-ll mminv(ll a, ll b) {ll arr[3]; extendgcd(a, b, arr); return arr[0];} //for non prime b
-ll mminvprime(ll a, ll b) {return expo(a, b - 2, b);}
-bool revsort(ll a, ll b) {return a > b;}
-ll combination(ll n, ll r, ll m, ll *fact, ll *ifact) {ll val1 = fact[n]; ll val2 = ifact[n - r]; ll val3 = ifact[r]; return (((val1 * val2) % m) * val3) % m;}
+long long gcd(long long a, long long b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
+long long expo(long long a, long long b, long long mod) {long long res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
+void extendgcd(long long a, long long b, long long*v) {if (b == 0) {v[0] = 1; v[1] = 0; v[2] = a; return ;} extendgcd(b, a % b, v); ll x = v[1]; v[1] = v[0] - v[1] * (a / b); v[0] = x; return;} //pass an arry of size1 3
+long long mminv(long long a, long long b) {long long arr[3]; extendgcd(a, b, arr); return arr[0];} //for non prime b
+long long mminvprime(long long a, long long b) {return expo(a, b - 2, b);}
+bool revsort(long long a, long long b) {return a > b;}
+long long combination(long long n, long long r, long long m, long long *fact, long long *ifact) {ll val1 = fact[n]; ll val2 = ifact[n - r]; ll val3 = ifact[r]; return (((val1 * val2) % m) * val3) % m;}
 void cse(int t) {cout << "Case " << t << ": ";}
-vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
-ll mod_add(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
-ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
-ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
-ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
-ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
-ll fact(ll n){if(n==0)return 1;return n*fact(n-1);}
-bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
-bool isPerfectSquare(ll x){if (x >= 0) {ll sr = sqrt(x);return (sr * sr == x);}return false;}
+vector<long long> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
+long long mod_add(long long a, long long b, long long m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
+long long mod_mul(long long a, long long b, long long m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
+long long mod_sub(long long a, long long b, long long m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
+long long mod_div(long long a, long long b, long long m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
+long long phin(long long n) {long long number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
+long long fact(long long n){if(n==0)return 1;return n*fact(n-1);}
+bool isPrime(long long n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
+bool isPerfectSquare(long long x){if (x >= 0) {ll sr = sqrt(x);return (sr * sr == x);}return false;}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*--------------------------------------My Personal Functions--------------------------------------------------------------------------------------------------------------*/
-void gc(ll n,ll maxi){unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();std::srand(seed);for (int i = 0; i < n; ++i) {cout<<(rand() % maxi) + 1<<" "; }cout<<endl;}
-bool af(const std::vector<ll>& arr, ll value) {auto it = std::find(arr.begin(), arr.end(), value);return it != arr.end();}
-bool anf(const std::vector<ll>& arr, ll value) {auto it = std::find(arr.begin(), arr.end(), value);return it == arr.end();}
+void gc(long long n,long long maxi){unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();std::srand(seed);for (int i = 0; i < n; ++i) {cout<<(rand() % maxi) + 1<<" "; }cout<<endl;}
+bool af(const std::vector<long long>& arr, long long value) {auto it = std::find(arr.begin(), arr.end(), value);return it != arr.end();}
+bool anf(const std::vector<long long>& arr, long long value) {auto it = std::find(arr.begin(), arr.end(), value);return it == arr.end();}
 bool strf(string s,char b){return s.find(b)!=string::npos;}
 bool strnf(string s,char b){return s.find(b)!=string::npos;}
-bool mf(map<ll,ll>&m,ll i){return m.find(i)!=m.end();}
-bool mnf(map<ll,ll>&m,ll i){return m.find(i)==m.end();}
-bool sf(set<ll>&s,ll i){return s.find(i)!=s.end();}
-bool snf(set<ll>&s,ll i){return s.find(i)==s.end();}
-bool isOdd(ll n){return n&1;}
-bool isEven(ll n){return !(n&1);}
-bool isSorted(vector<ll>&temp){for(ll i=0;i<temp.size()-1;i++){if(temp[i]>temp[i+1])return false;}return true;}
-bool allSame(vll &a){for(ll i=0;i<a.size()-1;i++){if(a[i]!=a[i+1])return false;}return true;}
+bool mf(map<long long,long long>&m,long long i){return m.find(i)!=m.end();}
+bool mnf(map<long long,long long>&m,long long i){return m.find(i)==m.end();}
+bool sf(set<long long>&s,long long i){return s.find(i)!=s.end();}
+bool snf(set<long long>&s,long long i){return s.find(i)==s.end();}
+bool isOdd(long long n){return n&1;}
+bool isEven(long long n){return !(n&1);}
+bool isSorted(vector<long long>&temp){for(long long i=0;i<temp.size()-1;i++){if(temp[i]>temp[i+1])return false;}return true;}
+bool allSame(vll &a){for(long long i=0;i<a.size()-1;i++){if(a[i]!=a[i+1])return false;}return true;}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
 
-void solve(ll t){
-   
-
+void solve(long long t){
+  
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -714,6 +713,6 @@ signed main(){
 	freopen("input.txt","r",stdin);
 	freopen("output.txt","w",stdout);
 #endif
-   Code By Nitesh05
+   Code By Nitesh06
 }
 /*----------------------------------------------------------------*/
