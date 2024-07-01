@@ -12,6 +12,15 @@
 #include<deque>
 #include<stack>
 #include<queue>
+#include<unordered_set>
+#include<utility>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <cstdint>
+#include <cstring>
+#include <functional>
+#include <iomanip>
 using namespace std;
 
 
@@ -43,13 +52,22 @@ using namespace std;
 #define vb vector<bool>
 #define vc vector<char>
 #define mll map<ll,ll>
-#define mcl map<char,ll>
-#define debug(input) for(auto &i:input)cout<<i<<" ";
+#define mcll map<char,ll>
+#define msll map<string,ll>
+#define mcc map<char,char>
+#define sll set<ll>
+#define sc set<char>
+#define stll stack<ll>
+#define stc stack<char>
+#define debug(input) for(auto &i:input)cout<<i<<" ";cout<<endl;
 #define take(input) for(auto &i:input)cin>>i;
-#define py cout<<"YES"<<endl;return;
-#define pn cout<<"NO"<<endl;return;
+#define py cout<<"YES"<<endl;
+#define pn cout<<"NO"<<endl;
 #define nl cout<<endl;
-#define cn continue;
+#define cn continue
+#define maxi(a) *max_element(all(a))
+#define mini(a) *min_element(all(a))
+#define print(element) cout<<element<<endl;
 /*-----------------------------------------------------------------------*/
 
 /*--------------------------Bit Manipulation Stuff------------------------------------------------------------------------------------------------*/
@@ -64,6 +82,8 @@ ll btd(ll n) {ll decimalNumber = 0;ll base = 1;ll remainder;while (n > 0) {remai
 ll ORinrange(ll left,ll right){while(left<right){left|=left+1;}return (left|right);}
 bool isPowerOfTwo(ll n){if(n==0)return false;return (ceil(log2(n)) == floor(log2(n)));}
 ll highestPowerOfTwo(ll n){ll ans=1,temp=2;while(temp<n){temp=temp<<1;if(temp>n)break;ans++;}return ans;}
+string dtb31(ll n) {bitset<31> binary(n);return binary.to_string();}
+string bitFlip(string s){string ans="";for(auto &i:s){if(i=='0')ans+='1';else ans+='0';}return ans;}
 /*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -71,7 +91,8 @@ ll highestPowerOfTwo(ll n){ll ans=1,temp=2;while(temp<n){temp=temp<<1;if(temp>n)
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
 ll expo(ll a, ll b, ll mod) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % mod; a = (a * a) % mod; b = b >> 1;} return res;}
 void extendgcd(ll a, ll b, ll*v) {if (b == 0) {v[0] = 1; v[1] = 0; v[2] = a; return ;} extendgcd(b, a % b, v); ll x = v[1]; v[1] = v[0] - v[1] * (a / b); v[0] = x; return;} //pass an arry of size1 3
-ll mminv(ll a, ll b) {ll arr[3]; extendgcd(a, b, arr); return arr[0];} //for non prime b
+ll lcm(ll a, ll b) {return (a / gcd(a, b)) * b;}
+ll mminv(ll a, ll b) {ll arr[3]; extendgcd(a, b, arr); return arr[0];} //for non AllPrimese b
 ll mminvprime(ll a, ll b) {return expo(a, b - 2, b);}
 bool revsort(ll a, ll b) {return a > b;}
 ll combination(ll n, ll r, ll m, ll *fact, ll *ifact) {ll val1 = fact[n]; ll val2 = ifact[n - r]; ll val3 = ifact[r]; return (((val1 * val2) % m) * val3) % m;}
@@ -80,11 +101,18 @@ vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i
 ll mod_add(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
 ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
-ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
+ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for AllPrimese m
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 ll fact(ll n){if(n==0)return 1;return n*fact(n-1);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 bool isPerfectSquare(ll x){if (x >= 0) {ll sr = sqrt(x);return (sr * sr == x);}return false;}
+ll sq(ll temp){return temp*temp;} 
+ll revNum(ll n){string temp=to_string(n);reverse(all(temp));return stoll(temp);}
+ll APsum(ll first_term, ll common_difference, ll num_terms) {return (num_terms * (2 * first_term + (num_terms - 1) * common_difference)) / 2;}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------Graph Stuff-------------------------------------------------------------------------------------------------------------*/
+class DisjointSet{vector<ll>rank,parent;public:DisjointSet(ll n){rank.resize(n+1,0);parent.resize(n+1);for(int i=0;i<=n;i++)parent[i]=i;}ll findParent(ll node){if(node==parent[node])return node;return parent[node]=findParent(parent[node]);}void unionByRank(ll x,ll y){ll parentX=findParent(x);ll parentY=findParent(y);if(parentX==parentY){return;}if(rank[parentX]<rank[parentY]){parent[parentX]=parentY;}else if(rank[parentY]<rank[parentX]){parent[parentY]=parentX;}else{parent[parentY]=parentX;rank[parentX]++;}}};
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -102,14 +130,18 @@ bool isOdd(ll n){return n&1;}
 bool isEven(ll n){return !(n&1);}
 bool isSorted(vector<ll>&temp){for(ll i=0;i<temp.size()-1;i++){if(temp[i]>temp[i+1])return false;}return true;}
 bool allSame(vll &a){for(ll i=0;i<a.size()-1;i++){if(a[i]!=a[i+1])return false;}return true;}
+void countingSort(vector<ll>& arr) {ll maxElement = *max_element(arr.begin(), arr.end());vector<ll> count(maxElement + 1, 0);for(ll num : arr) {count[num]++;}for (ll i = 1; i <= maxElement; i++) {count[i] += count[i - 1];}vector<ll> output(arr.size());for (ll i = arr.size() - 1; i >= 0; i--) {output[count[arr[i]] - 1] = arr[i];count[arr[i]]--;}for (ll i = 0; i < arr.size(); i++) {arr[i] = output[i];}}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
 
 void solve(ll t){
- 
+    
+
+    
 }
+
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -120,5 +152,6 @@ signed main(){
 	freopen("output.txt","w",stdout);
 #endif
    Code By Nitesh05
+   //solve(1);
 }
 /*----------------------------------------------------------------*/
