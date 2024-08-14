@@ -104,11 +104,6 @@ ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n
 ll inverseModulo(ll n){return modExpo(n,MOD-2,MOD);}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*---------------------------------------Graph Stuff-------------------------------------------------------------------------------------------------------------*/
-class DisjointSet{vector<ll>rank,parent;public:DisjointSet(ll n){rank.resize(n+1,0);parent.resize(n+1);for(int i=0;i<=n;i++)parent[i]=i;}ll findParent(ll node){if(node==parent[node])return node;return parent[node]=findParent(parent[node]);}void unionByRank(ll x,ll y){ll parentX=findParent(x);ll parentY=findParent(y);if(parentX==parentY){return;}if(rank[parentX]<rank[parentY]){parent[parentX]=parentY;}else if(rank[parentY]<rank[parentX]){parent[parentY]=parentX;}else{parent[parentY]=parentX;rank[parentX]++;}}};
-/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
 /*--------------------------------------My Personal Functions--------------------------------------------------------------------------------------------------------------*/
 void gc(ll n,ll maxi){unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();std::srand(seed);for (int i = 0; i < n; ++i) {cout<<(rand() % maxi) + 1<<" "; }cout<<endl;}
 bool af(const std::vector<ll>& arr, ll value) {auto it = std::find(arr.begin(), arr.end(), value);return it != arr.end();}
