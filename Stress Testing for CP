@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Brute-force solution (known to be correct)
+int bruteForceSolution(int n, const vector<int>& arr) {
+    int result = 0;
+    // Implement the brute-force logic here
+    return result;
+}
+
+// Optimized solution (to be tested)
+int optimizedSolution(int n, const vector<int>& arr) {
+    int result = 0;
+    // Implement the optimized logic here
+    return result;
+}
+
+// Test case generator
+vector<int> generateTestCase(int n) {
+    vector<int> arr(n);
+    for (int i = 0; i < n; ++i) {
+        arr[i] = rand() % 100;  // Random value in range [0, 99]
+    }
+    return arr;
+}
+
+int main() {
+    srand(time(0));  // Seed for random number generation
+    int testCount = 1000;  // Number of tests to run
+
+    for (int t = 0; t < testCount; ++t) {
+        int n = rand() % 100 + 1;  // Random size for array [1, 100]
+        vector<int> testCase = generateTestCase(n);
+
+        int bruteResult = bruteForceSolution(n, testCase);
+        int optimizedResult = optimizedSolution(n, testCase);
+
+        if (bruteResult != optimizedResult) {
+            cout << "Test case failed!" << endl;
+            cout << "Input: ";
+            for (int x : testCase) cout << x << " ";
+            cout << "\nBrute-force result: " << bruteResult << endl;
+            cout << "Optimized result: " << optimizedResult << endl;
+            break;
+        }
+    }
+
+    cout << "Stress testing completed!" << endl;
+    return 0;
+}
