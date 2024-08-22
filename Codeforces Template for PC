@@ -27,12 +27,13 @@ using namespace std;
 /*-----------------------For Input & Output------------------------------*/
 #define Code ios_base::sync_with_stdio(false);
 #define By cin.tie(NULL);cout.tie(NULL); 
-#define Nitesh05 ll t;cin>>t;for(ll i=1;i<=t;i++){solve(i);}
+#define niteshsaxena03 ll t;cin>>t;for(ll i=1;i<=t;i++){solve(i);}
 /*-----------------------------------------------------------------------*/
 
 
 /*-------------------------For Saving Time----------------------------------------*/
 #define ll long long
+#define int long long
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -125,7 +126,7 @@ void countingSort(vector<ll>& arr) {ll maxElement = *max_element(arr.begin(), ar
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
 
 void solve(ll t){
-    
+        
 
     
 }
@@ -139,7 +140,7 @@ signed main(){
 	freopen("input.txt","r",stdin);
 	freopen("output.txt","w",stdout);
 #endif
-   Code By Nitesh05
-   //solve(1);
+   //Code By niteshsaxena03
+   solve(1);
 }
 /*----------------------------------------------------------------*/
