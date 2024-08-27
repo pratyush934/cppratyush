@@ -61,13 +61,8 @@ using namespace std;
 #define stll stack<ll>
 #define stc stack<char>
 #define debug(input) for(auto &i:input)cout<<i<<" ";cout<<endl;
+#define debugPair(input) for(auto i:a)cout<<i.first<<" "<<i.second<<endl;
 #define take(input) for(auto &i:input)cin>>i;
-#define py cout<<"YES"<<endl;
-#define pn cout<<"NO"<<endl;
-#define nl cout<<endl;
-#define cn continue
-#define maxi(a) *max_element(all(a))
-#define mini(a) *min_element(all(a))
 #define print(element) cout<<element<<endl;
 /*-----------------------------------------------------------------------*/
 
@@ -115,21 +110,15 @@ bool mf(map<ll,ll>&m,ll i){return m.find(i)!=m.end();}
 bool mnf(map<ll,ll>&m,ll i){return m.find(i)==m.end();}
 bool sf(set<ll>&s,ll i){return s.find(i)!=s.end();}
 bool snf(set<ll>&s,ll i){return s.find(i)==s.end();}
-bool isOdd(ll n){return n&1;}
-bool isEven(ll n){return !(n&1);}
-bool isSorted(vector<ll>&temp){for(ll i=0;i<temp.size()-1;i++){if(temp[i]>temp[i+1])return false;}return true;}
-bool allSame(vll &a){for(ll i=0;i<a.size()-1;i++){if(a[i]!=a[i+1])return false;}return true;}
-void countingSort(vector<ll>& arr) {ll maxElement = *max_element(arr.begin(), arr.end());vector<ll> count(maxElement + 1, 0);for(ll num : arr) {count[num]++;}for (ll i = 1; i <= maxElement; i++) {count[i] += count[i - 1];}vector<ll> output(arr.size());for (ll i = arr.size() - 1; i >= 0; i--) {output[count[arr[i]] - 1] = arr[i];count[arr[i]]--;}for (ll i = 0; i < arr.size(); i++) {arr[i] = output[i];}}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
 
-void solve(ll t){
-        
 
-    
-}
+void solve(ll t) { 
+
+} 
 
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
