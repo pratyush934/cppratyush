@@ -123,7 +123,7 @@ signed main(){
 	freopen("input.txt","r",stdin);
 	freopen("output.txt","w",stdout);
 #endif
-   //Code By niteshsaxena03
-   solve(1);
+   Code By SaxenaJi
+   //solve(1);
 }
 /*----------------------------------------------------------------*/
