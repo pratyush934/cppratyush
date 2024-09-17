@@ -27,7 +27,7 @@ using namespace std;
 /*-----------------------For Input & Output------------------------------*/
 #define Code ios_base::sync_with_stdio(false);
 #define By cin.tie(NULL);cout.tie(NULL); 
-#define niteshsaxena03 ll t;cin>>t;for(ll i=1;i<=t;i++){solve(i);}
+#define NiteshSaxena ll t;cin>>t;for(ll i=1;i<=t;i++){solve(i);}
 /*-----------------------------------------------------------------------*/
 
 
@@ -111,8 +111,31 @@ bool snf(set<ll>&s,ll i){return s.find(i)==s.end();}
 
 /*----------------------------------Solution of this Question-----------------------------------------------------------------------------------------*/
 
+
 void solve(int t) {
-    
+  int n;cin>>n;
+  int countZero=0;
+  vector<int>a(n);take(a);
+
+  map<int,int>m;
+  int maxFreq=0,maxElement=-1e9;
+  for(auto &i:a){
+  	 if(i==0)countZero++;
+  	 else{
+  	 	m[i]++;
+  	 	if(m[i]>maxFreq){
+  	 		maxFreq=m[i];
+  	 		maxElement=i;
+  	 	}
+  	 }
+  }
+  int ans1=nCr(maxFreq+countZero,2);
+
+  int ans2=0;
+  for(auto &i:m){
+  	ans2+=nCr(i.second,2);
+  }
+  print(max(ans1,ans2));
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -123,7 +146,7 @@ signed main(){
 	freopen("input.txt","r",stdin);
 	freopen("output.txt","w",stdout);
 #endif
-   Code By SaxenaJi
+   Code By NiteshSaxena
    //solve(1);
 }
 /*----------------------------------------------------------------*/
