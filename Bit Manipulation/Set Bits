@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+
+// Function to count the number of set bits in a number
+ll set_bits(ll n) {
+    return __builtin_popcountll(n);
+}
+
+int main() {
+    ll n = 15; // Example number
+    cout << "Number of set bits in " << n << " is: " << set_bits(n) << endl;
+    return 0;
+}
