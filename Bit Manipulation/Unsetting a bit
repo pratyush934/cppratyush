@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+
+// Function to unset the k-th bit
+ll unsetBit(ll n, ll k) {
+    return n & ~(1LL << k);
+}
+
+int main() {
+    ll n = 7; // Example number (111 in binary)
+    ll k = 1; // Unset the 1st bit
+    ll result = unsetBit(n, k);
+    cout << "Unsetting the " << k << "-th bit of " << n << " gives: " << result << endl;
+    return 0;
+}
