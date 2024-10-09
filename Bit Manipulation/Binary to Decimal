@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+
+// Function to convert binary to decimal
+ll btd(ll n) {
+    ll decimalNumber = 0;
+    ll base = 1;
+    ll remainder;
+    while (n > 0) {
+        remainder = n % 10;
+        decimalNumber += remainder * base;
+        n /= 10;
+        base *= 2;
+    }
+    return decimalNumber;
+}
+
+int main() {
+    ll n = 1111; // Example binary number
+    cout << "Binary " << n << " in decimal is: " << btd(n) << endl;
+    return 0;
+}
