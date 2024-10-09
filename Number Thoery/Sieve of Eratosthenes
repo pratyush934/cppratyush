@@ -1,0 +1,55 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to implement Sieve of Eratosthenes and return primes up to n
+vector<int> sieveOfEratosthenes(int n) {
+    vector<bool> isPrime(n + 1, true);
+    vector<int> primes;
+
+    // Sieve logic to mark non-prime numbers
+    for (int p = 2; p * p <= n; p++) {
+        if (isPrime[p]) {
+            for (int i = p * p; i <= n; i += p)
+                isPrime[i] = false;
+        }
+    }
+
+    // Collect all prime numbers into a vector
+    for (int p = 2; p <= n; p++) {
+        if (isPrime[p]) {
+            primes.push_back(p);
+        }
+    }
+
+    return primes;
+}
+
+// Function to check if a number is prime (using the sieve result)
+bool isPrime(int num, const vector<bool>& isPrime) {
+    if (num < 2) return false;  // 0 and 1 are not primes
+    return isPrime[num];
+}
+
+int main() {
+    int n;
+    cout << "Enter a number to find primes up to: ";
+    cin >> n;
+
+    // Generate primes and boolean array for primality checking
+    vector<bool> isPrimeArr(n + 1, true);
+    sieveOfEratosthenes(n);  // Fill the prime array
+
+    // Example of using the isPrime function
+    int checkNum;
+    cout << "Enter a number to check if it's prime: ";
+    cin >> checkNum;
+
+    if (isPrime(checkNum, isPrimeArr)) {
+        cout << checkNum << " is a prime number." << endl;
+    } else {
+        cout << checkNum << " is not a prime number." << endl;
+    }
+
+    return 0;
+}
