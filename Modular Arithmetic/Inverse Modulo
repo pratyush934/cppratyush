@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+#define MOD 1000000007
+
+// Modular Exponentiation function
+ll modExpo(ll a, ll b, ll mod) {
+    ll res = 1;
+    while (b > 0) {
+        if (b & 1) res = (res * a) % mod;
+        a = (a * a) % mod;
+        b = b >> 1;
+    }
+    return res;
+}
+
+// Inverse modulo function (valid for prime mod using Fermat's Little Theorem)
+ll inverseModulo(ll n) {
+    return modExpo(n, MOD - 2, MOD);  // a^(p-2) % p is the modular inverse for prime mod
+}
+
+int main() {
+    ll n = 5;
+    cout << "Modular inverse of " << n << " mod " << MOD << " is " << inverseModulo(n) << endl;
+    return 0;
+}
