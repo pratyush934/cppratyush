@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+
+// Function to set the k-th bit
+ll setBit(ll n, ll k) {
+    return n | (1LL << k);
+}
+
+int main() {
+    ll n = 5; // Example number
+    ll k = 1; // Set the 1st bit
+    ll result = setBit(n, k);
+    cout << "Setting the " << k << "-th bit of " << n << " gives: " << result << endl;
+    return 0;
+}
