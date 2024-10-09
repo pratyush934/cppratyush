@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+#define MOD 1000000007
+
+ll mod_add(ll a, ll b, ll m) {
+    a = a % m;
+    b = b % m;
+    return (((a + b) % m) + m) % m;
+}
+
+int main() {
+    ll a = 1000000006, b = 5;
+    cout << "Modular addition of " << a << " and " << b << " mod " << MOD << " is " << mod_add(a, b, MOD) << endl;
+    return 0;
+}
