@@ -1,0 +1,17 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+typedef long long ll;
+
+// Function to check if a number is a power of two
+bool isPowerOfTwo(ll n) {
+    if (n == 0) return false;
+    return (ceil(log2(n)) == floor(log2(n)));
+}
+
+int main() {
+    ll n = 8; // Example number
+    cout << n << " is a power of two: " << (isPowerOfTwo(n) ? "True" : "False") << endl;
+    return 0;
+}
