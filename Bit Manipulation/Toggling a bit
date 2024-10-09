@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+
+// Function to toggle the k-th bit
+ll toggleBit(ll n, ll k) {
+    return n ^ (1LL << k);
+}
+
+int main() {
+    ll n = 5; // Example number (101 in binary)
+    ll k = 0; // Toggle the 0-th bit
+    ll result = toggleBit(n, k);
+    cout << "Toggling the " << k << "-th bit of " << n << " gives: " << result << endl;
+    return 0;
+}
