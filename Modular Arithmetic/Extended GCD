@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+
+void extendgcd(ll a, ll b, ll *v) {
+    if (b == 0) {
+        v[0] = 1;
+        v[1] = 0;
+        v[2] = a;
+        return;
+    }
+    extendgcd(b, a % b, v);
+    ll x = v[1];
+    v[1] = v[0] - v[1] * (a / b);
+    v[0] = x;
+    return;
+}
+
+int main() {
+    ll a = 56, b = 98;
+    ll v[3];  // v[0] = x, v[1] = y, v[2] = gcd(a,b)
+    extendgcd(a, b, v);
+    cout << "Extended GCD results: x = " << v[0] << ", y = " << v[1] << ", gcd = " << v[2] << endl;
+    return 0;
+}
