@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+typedef long long ll;
+
+// Function to check if the k-th bit is set
+bool isBitSet(ll n, ll k) {
+    return (n & (1LL << k)) != 0;
+}
+
+int main() {
+    ll n = 5; // Example number
+    ll k = 2; // Check the 2nd bit
+    cout << "Is the " << k << "-th bit of " << n << " set? " << (isBitSet(n, k) ? "Yes" : "No") << endl;
+    return 0;
+}
