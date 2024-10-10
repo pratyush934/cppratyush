@@ -1,0 +1,38 @@
+ 
+#define MOD 1000000007
+#define ll long long
+ 
+const int N = 2e5 + 5;
+ll fact[N];
+ 
+// Function to precompute factorials and their modular inverses
+void precompute_factorials() {
+    fact[0] = 1;
+    for(ll i = 1; i < N; ++i)
+        fact[i] = (fact[i - 1] * i) % MOD;
+}
+ 
+// Binary Exponentiation to compute (a^b) % mod
+ll pw(ll a, ll b) {
+    ll res = 1;
+    while (b > 0) {
+        if (b & 1) res = (res * a) % MOD;
+        a = (a * a) % MOD;
+        b >>= 1;
+    }
+    return res;
+}
+ 
+// Function to calculate nCr % mod using precomputed factorials
+ll C(ll n, ll r) {
+    if (n < r) return 0;
+    return (fact[n] * pw((fact[r] * fact[n - r]) % MOD, MOD - 2)) % MOD;
+}
+
+int main(){
+    //call function to precompute factorials
+
+    precompute_factorials();
+
+    // now rest of the code
+}
