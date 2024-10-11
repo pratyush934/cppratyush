@@ -24,7 +24,7 @@ ll pw(ll a, ll b) {
 }
  
 // Function to calculate nCr % mod using precomputed factorials
-ll C(ll n, ll r) {
+ll nCr(ll n, ll r) {
     if (n < r) return 0;
     return (fact[n] * pw((fact[r] * fact[n - r]) % MOD, MOD - 2)) % MOD;
 }
