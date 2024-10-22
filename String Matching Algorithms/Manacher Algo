@@ -78,7 +78,7 @@ int main() {
     cout<<"The longest palindromic substring is "<<manacher.longestPalindromeSubstring()<<endl;
 
     // Check if substring is palindrome (zero-indexed)
-    int l = 0, r = 5;  // Check substring "aba"
+    int l = 0, r = s.size()-1; 
     if (manacher.checkPalindrome(l, r)) {
         std::cout << "Substring from " << l << " to " << r << " is a palindrome." << std::endl;
     } else {
