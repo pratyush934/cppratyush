@@ -1,0 +1,47 @@
+class KMP {
+    vector<int> pi;   // Stores the prefix function
+    string pattern;   // The pattern to search for
+public:
+    // Constructor initializes the pattern and builds the prefix function
+    KMP(const string& pat) : pattern(pat) {
+        pi = prefix_function(pattern);
+    }
+
+    // Given prefix function implementation
+    vector<int> prefix_function(const string& s) {
+        int n = (int)s.length();
+        vector<int> pi(n);
+        for (int i = 1; i < n; i++) {
+            int j = pi[i - 1];
+            while (j > 0 && s[i] != s[j])
+                j = pi[j - 1];
+            if (s[i] == s[j])
+                j++;
+            pi[i] = j;
+        }
+        return pi;
+    }
+
+    // Function to search for occurrences of the pattern in the text
+    vector<int> search(const string& text) {
+        vector<int> matches; // Store the positions of matches
+        int m = pattern.size();
+        int n = text.size();
+        int j = 0; // Index for the pattern
+
+        for (int i = 0; i < n; i++) {
+            while (j > 0 && text[i] != pattern[j]) {
+                j = pi[j - 1]; // Fall back in the prefix function
+            }
+            if (text[i] == pattern[j]) {
+                j++; // Characters match, move to the next character in the pattern
+            }
+            if (j == m) { // Found a match
+                matches.push_back(i - m + 1); // Record the start index of the match
+                j = pi[j - 1]; // Continue searching for more matches
+            }
+        }
+        return matches; // Return all matches found
+    }
+};
+
