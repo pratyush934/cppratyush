@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 class Manacher {
     string t;
     vector<int> p;
@@ -66,3 +69,21 @@ public:
         return ans;
     }
 };
+
+int main() {
+    std::string s = "noonaffanoon";
+    Manacher manacher(s);
+    
+    //finding longestPalindromeSubstring
+    cout<<"The longest palindromic substring is "<<manacher.longestPalindromeSubstring()<<endl;
+
+    // Check if substring is palindrome (zero-indexed)
+    int l = 0, r = 5;  // Check substring "aba"
+    if (manacher.checkPalindrome(l, r)) {
+        std::cout << "Substring from " << l << " to " << r << " is a palindrome." << std::endl;
+    } else {
+        std::cout << "Substring from " << l << " to " << r << " is not a palindrome." << std::endl;
+    }
+
+    return 0;
+}
