@@ -1,6 +1,10 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class KMP {
     vector<int> pi;   // Stores the prefix function
     string pattern;   // The pattern to search for
+
 public:
     // Constructor initializes the pattern and builds the prefix function
     KMP(const string& pat) : pattern(pat) {
@@ -45,3 +49,22 @@ public:
     }
 };
 
+int main() {
+    string text = "ababcabcabababd";
+    string pattern = "ababd";
+
+    KMP kmp(pattern);
+    vector<int> matches = kmp.search(text);
+
+    if (matches.empty()) {
+        cout << "No matches found." << endl;
+    } else {
+        cout << "Pattern found at indices: ";
+        for (int index : matches) {
+            cout << index << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
