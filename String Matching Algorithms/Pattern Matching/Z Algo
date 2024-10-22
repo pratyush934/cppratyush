@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class ZAlgo {
+public:
+    // Function to compute the Z array for the concatenated string
+    vector<int> z_func(const string &s) {
+        int n = s.size();
+        vector<int> z(n, 0);
+        int l = 0, r = 0;
+
+        // Iterate to create the Z function 
+        for (int i = 1; i < n; i++) {
+            // Copy till previous is does not exceed range 
+            if (i <= r) {
+                z[i] = min(r - i + 1, z[i - l]);
+            }
+            
+            // Re-start comparison 
+            while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {
+                z[i]++;
+            }
+
+            // Update l and r if a new rightmost Z box is found
+            if (i + z[i] - 1 > r) {
+                l = i;
+                r = i + z[i] - 1;
+            }
+        }
+
+        return z;
+    }
+
+    // Function to find all occurrences of pattern `pat` in text `txt`
+    vector<int> search(const string &txt, const string &pat) {
+        string concat = pat + "$" + txt; // Concatenate pattern, a special character, and text
+        vector<int> z = z_func(concat);
+        vector<int> result;
+
+        // The length of the pattern
+        int patLength = pat.size();
+
+        // Check Z values to find matches
+        for (int i = 0; i < z.size(); i++) {
+            if (z[i] == patLength) {
+                result.push_back(i - patLength - 1); // Store the starting index of the match
+            }
+        }
+
+        return result; // Return all starting indices of matches
+    }
+};
+
+// Example usage
+int main() {
+    string txt = "ababcababcabc";
+    string pat = "abc";
+
+    ZAlgo k; // Create an instance of ZAlgorithm
+    vector<int> indices = k.search(txt, pat); // Find occurrences of pattern in text
+
+    // Print the indices where pattern occurs
+    if (indices.empty()) {
+        cout << "Pattern not found." << endl;
+    } else {
+        cout << "Pattern found at indices: ";
+        for (auto index : indices) {
+            cout << index << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
