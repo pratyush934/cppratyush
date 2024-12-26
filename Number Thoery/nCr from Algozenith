@@ -1,12 +1,10 @@
-#include <vector>
-using namespace std;
-typedef long long ll;
-
-const ll MOD = 1e9 + 7; 
+const int MOD = 1e9 + 7; 
 const int MAX = 1e6; 
 
+/*
 1) Factorials and Binomial Coefficient Calculation
 Efficient computation using factorials for cases when n<1e6.
+*/
 
 vector<ll> fact(MAX + 1), inv_fact(MAX + 1);
 
@@ -39,9 +37,10 @@ ll ncr(int n, int k) {
     return (fact[n] * ((inv_fact[k] * inv_fact[n - k]) % MOD)) % MOD;
 }
 
-
+/*
 2) Multiplication for Large 'r'
 Efficient multiplication technique for cases when 'r' < 1e6.
+*/
 
 ll multiplication(int n, int r) {
     ll result = 1;
