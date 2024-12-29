@@ -11,5 +11,4 @@ ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) %
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 ll inverseModulo(ll n){return modExpo(n,MOD-2,MOD);}
-ll nCr(int n, int r) {if (r > n) return 0;if (r == 0 || n == r) return 1;double res = 0;for (int i = 0; i < r; i++) {res += log(n-i) - log(i+1);}return (int)round(exp(res));}
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
