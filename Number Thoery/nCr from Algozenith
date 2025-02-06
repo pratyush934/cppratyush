@@ -36,3 +36,5 @@ ll nCr(int n, int k) {
     if (k > n) return 0;
     return (fact[n] * ((inv_fact[k] * inv_fact[n - k]) % MOD)) % MOD;
 }
+
+bool temp=false;
