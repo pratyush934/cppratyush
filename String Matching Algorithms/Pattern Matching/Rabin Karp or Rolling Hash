@@ -1,85 +1,48 @@
 #include<bits/stdc++.h>
-using namespace std; 
-#define ll long long
+using namespace std;
 
-class RabinKarp {
-    const ll MOD1 = 1e9 + 7; // First modulus for hashing
-    const ll MOD2 = 1e9 + 9; // Second modulus for hashing
-    const ll P1 = 31;        // First prime base for hashing
-    const ll P2 = 37;        // Second prime base for hashing
+#define int long long
+struct hasher{
+    int base,mod;
+    vector<int> hash,basepow;
+    hasher(){
 
-    // Hash function to assign a unique value to each character
-    ll charValue(char c) {
-        if (c >= 'a' && c <= 'z') return c - 'a' + 1; // 'a' -> 1, 'b' -> 2, ..., 'z' -> 26
-        if (c >= 'A' && c <= 'Z') return c - 'A' + 27; // 'A' -> 27, 'B' -> 28, ..., 'Z' -> 52
-        return 0; // Handle other characters if needed
     }
-
-public:
-    // Function to find occurrences of the pattern `pat` in the text `txt`
-    vector<ll> search(const string &txt, const string &pat) {
-        ll n = txt.size();
-        ll m = pat.size();
-
-        if (m > n) {
-            return {}; // Pattern cannot be larger than text
+    hasher(string s, int _base,int _mod){
+        base = _base;mod = _mod;    
+        int n = s.length();
+        hash.resize(n+1);basepow.resize(n+1);
+        hash[0] = 0; basepow[0] = 1;
+        for(int i=1;i<=n;i++){
+            hash[i] = hash[i-1] * base + (s[i-1]-'a'+1) % mod;
+            basepow[i] = basepow[i-1] * base % mod;
         }
+    }
+    int gethash(int l,int r){// 0 indexed ... in O(1).
+        int ans =  (hash[r+1] - hash[l] * basepow[r-l+1])%mod;
+        return (ans + mod)%mod;
+    } 
+};
 
-        // Precompute powers of P1 and P2 up to the size of the text
-        vector<ll> powP1(n), powP2(n);
-        powP1[0] = 1;
-        powP2[0] = 1;
-        for (ll i = 1; i < n; i++) {
-            powP1[i] = (powP1[i - 1] * P1) % MOD1;
-            powP2[i] = (powP2[i - 1] * P2) % MOD2;
-        }
-
-        // Compute the hash value for the pattern `pat` using both moduli
-        ll patHash1 = 0, patHash2 = 0;
-        for (ll i = 0; i < m; i++) {
-            patHash1 = (patHash1 + charValue(pat[i]) * powP1[i]) % MOD1;
-            patHash2 = (patHash2 + charValue(pat[i]) * powP2[i]) % MOD2;
-        }
-
-        // Compute the prefix hashes for the text `txt`
-        vector<ll> prefixHash1(n + 1, 0), prefixHash2(n + 1, 0);
-        for (ll i = 0; i < n; i++) {
-            prefixHash1[i + 1] = (prefixHash1[i] + charValue(txt[i]) * powP1[i]) % MOD1;
-            prefixHash2[i + 1] = (prefixHash2[i] + charValue(txt[i]) * powP2[i]) % MOD2;
-        }
-
-        // Find all occurrences of the pattern
-        vector<ll> result;
-        for (ll i = 0; i <= n - m; i++) {
-            ll currHash1 = (prefixHash1[i + m] + MOD1 - prefixHash1[i]) % MOD1;
-            ll currHash2 = (prefixHash2[i + m] + MOD2 - prefixHash2[i]) % MOD2;
-            ll expectedHash1 = (patHash1 * powP1[i]) % MOD1;
-            ll expectedHash2 = (patHash2 * powP2[i]) % MOD2;
-
-            // Match if both hashes match
-            if (currHash1 == expectedHash1 && currHash2 == expectedHash2) {
-                result.push_back(i); // Match found at index `i`
-            }
-        }
-
-        return result;
+struct doublehasher{
+    hasher h1,h2;
+    doublehasher(string s){
+        h1 = hasher(s,37,999999929);
+        h2 = hasher(s,41,999999937);
+    }
+    pair<int,int> gethash(int l,int r){
+        return {h1.gethash(l,r), h2.gethash(l,r)};
     }
 };
 
-signed main() {
-    // Example usage of the RabinKarp class
-    RabinKarp k;
-
-    string txt = "arajaarajjraj";
-    string pat = "raj";
-
-    // Finding pattern matches
-    vector<ll> matches = k.search(txt, pat);
-    cout << "Pattern found at indices: ";
-    for (int idx : matches) {
-        cout << idx << " ";
+signed main(){
+    string s;
+    cin>>s;
+    int n = s.length();
+    doublehasher shash(s);
+    for(int len=1;len<n;len++){
+        if(shash.gethash(0,len-1) == shash.gethash(n-len,n-1)){
+            cout<<len<<" ";
+        }
     }
-    cout << endl;
-
-    return 0;
 }
